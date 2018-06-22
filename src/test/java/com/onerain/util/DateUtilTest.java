@@ -27,7 +27,7 @@ public class DateUtilTest {
 	}
 
 	@Test
-	public void testDayOfYear_check() {
+	public void testDayOfYear_check4Years() {
 		// Set up
 		int year = 2018;
 		int month = 1;
