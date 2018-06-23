@@ -11,7 +11,7 @@ import org.junit.Test;
 public class DateUtilTest {
 
 	@Test
-	public void testDayOfYear() {
+	public void test_dayOfYear() {
 		// Set up
 		int year = 2018;
 		int month = 6;
@@ -22,12 +22,12 @@ public class DateUtilTest {
 		int dayOfYear = DateUtil.dayOfYear(month, dayOfMonth, year);
 
 		// Verify
-		assertTrue(expected == javaGetDayOfYear(month, dayOfMonth, year));
+		assertTrue(expected == DateUtil.getDayOfYear(month, dayOfMonth, year));
 		assertTrue(dayOfYear == expected);
 	}
 
 	@Test
-	public void testDayOfYear_check4Years() {
+	public void test_dayOfYear_check4Years() {
 		// Set up
 		int year = 2018;
 		int month = 1;
@@ -47,8 +47,8 @@ public class DateUtilTest {
 			int dayOfYear = DateUtil.dayOfYear(month, dayOfMonth, year);
 
 			// Verify
-			assertTrue("Java fails on: " + getDateString(month, dayOfMonth, year),
-					expected == javaGetDayOfYear(month, dayOfMonth, year));
+			assertTrue("Java fails on: " + DateUtil.getDayOfYear(month, dayOfMonth, year),
+					expected == DateUtil.getDayOfYear(month, dayOfMonth, year));
 			assertTrue("Util fails on: " + getDateString(month, dayOfMonth, year),
 					dayOfYear == expected);
 
@@ -63,7 +63,7 @@ public class DateUtilTest {
 	}
 
 	@Test
-	public void testDayOfYear_leapYear() {
+	public void test_dayOfYear_leapYear() {
 		// Set up
 		int year = 2020;
 		int month = 12;
@@ -74,12 +74,12 @@ public class DateUtilTest {
 		int dayOfYear = DateUtil.dayOfYear(month, dayOfMonth, year);
 
 		// Verify
-		assertTrue(expected == javaGetDayOfYear(month, dayOfMonth, year));
+		assertTrue(expected == DateUtil.getDayOfYear(month, dayOfMonth, year));
 		assertTrue(dayOfYear == expected);
 	}
 
 	@Test
-	public void testDayOfYear_lastDayLeapYear() {
+	public void test_dayOfYear_lastDayLeapYear() {
 		// Set up
 		int year = 2020;
 		int month = 12;
@@ -90,12 +90,12 @@ public class DateUtilTest {
 		int dayOfYear = DateUtil.dayOfYear(month, dayOfMonth, year);
 
 		// Verify
-		assertTrue(expected == javaGetDayOfYear(month, dayOfMonth, year));
+		assertTrue(expected == DateUtil.getDayOfYear(month, dayOfMonth, year));
 		assertTrue(dayOfYear == expected);
 	}
 
 	@Test
-	public void testDayOfYear_dayOne() {
+	public void test_dayOfYear_dayOne() {
 		// Set up
 		int year = 2018;
 		int month = 1;
@@ -106,12 +106,12 @@ public class DateUtilTest {
 		int dayOfYear = DateUtil.dayOfYear(month, dayOfMonth, year);
 
 		// Verify
-		assertTrue(expected == javaGetDayOfYear(month, dayOfMonth, year));
+		assertTrue(expected == DateUtil.getDayOfYear(month, dayOfMonth, year));
 		assertTrue(dayOfYear == expected);
 	}
 
 	@Test
-	public void testDayOfYear_lastDay() {
+	public void test_dayOfYear_lastDay() {
 		// Set up
 		int year = 2018;
 		int month = 12;
@@ -123,17 +123,29 @@ public class DateUtilTest {
 		int dayOfYear = DateUtil.dayOfYear(month, dayOfMonth, year);
 
 		// Verify
-		assertTrue(expected == javaGetDayOfYear(month, dayOfMonth, year));
+		assertTrue(expected == DateUtil.getDayOfYear(month, dayOfMonth, year));
 		assertTrue(dayOfYear == expected);
 	}
 
-	private int javaGetDayOfYear(int month, int dayOfMonth, int year) {
-		Calendar calendar = new GregorianCalendar(year, month - 1, dayOfMonth);
-		calendar.setTimeZone(TimeZone.getTimeZone("UTC"));
-		int dayOfYear = calendar.get(Calendar.DAY_OF_YEAR);
-		return dayOfYear;
+	@Test
+	public void test_convertDateToTimeInSeconds() {
+		// Set up
+		int year = 2018;
+		int month = 1;
+		int dayOfMonth = 1;
+		long expected = 1514764800;
+
+		// Test
+		long seconds = DateUtil.secondsSinceEpoch(month, dayOfMonth, year);
+
+		// Verify
+		assertTrue(seconds == expected);
+		String dateString = DateUtil.getDateStringFromEpochSeconds(seconds);
+		assertTrue("was: " + dateString, dateString.equals(month + "/" + dayOfMonth + "/" + year));
 	}
 
+	// Helper to format data to MM/dd/yy string
+	//
 	private String getDateString(int month, int dayOfMonth, int year) {
 		return month + "/" + dayOfMonth + "/" + year;
 	}
