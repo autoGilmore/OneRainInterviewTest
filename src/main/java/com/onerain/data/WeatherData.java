@@ -21,6 +21,9 @@ public class WeatherData {
 		parseData(data);
 	}
 
+	public WeatherData() {
+	}
+
 	private void parseData(String data) {
 		if (data != null && !data.isEmpty()) {
 			data = data.replaceAll("\\s+", "");
@@ -134,5 +137,13 @@ public class WeatherData {
 
 	public long getEpochSeconds() {
 		return this.epochSeconds;
+	}
+
+	public void setRainDataFromCSVKeyValueString(String csvKeyValue) {
+		int csvIndex = csvKeyValue.indexOf(",");
+		String keyString = csvKeyValue.substring(0, csvIndex);
+		String valueString = csvKeyValue.substring(csvIndex + 1);
+		this.epochSeconds = Long.valueOf(keyString);
+		this.rainAmount = valueString;
 	}
 }

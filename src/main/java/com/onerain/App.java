@@ -14,5 +14,8 @@ public class App {
 		// start weather station listening server
 		WeatherStationServer server = new WeatherStationServer();
 		server.start();
+
+		// provide a hourly report
+		System.out.println(CustomMessage.getHourlyRainReport());
 	}
 }

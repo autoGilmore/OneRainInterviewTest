@@ -62,6 +62,10 @@ public class DateUtil {
 		return calendar.getTimeInMillis() / 1000L;
 	}
 
+	public static String getDateStringFromEpochSeconds(String value) {
+		return getDateStringFromEpochSeconds(Long.valueOf(value));
+	}
+
 	// Convert epoch seconds to date string.
 	//
 	public static String getDateStringFromEpochSeconds(long epochSeconds) {

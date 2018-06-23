@@ -1,7 +1,7 @@
 package com.onerain.data;
 
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 import org.junit.Test;
 
@@ -70,5 +70,18 @@ public class WeatherDataTest {
 				weatherData.getRainAmountString().equals("0"));
 		assertTrue("was: " + weatherData.getDepthAmountString(),
 				weatherData.getDepthAmountString().equals("0"));
+	}
+
+	@Test
+	public void test_setFromDataFile() {
+		// Set up
+		WeatherData weatherData = new WeatherData();
+		String data = "1528816080,8";
+
+		// Test
+		weatherData.setRainDataFromCSVKeyValueString(data);
+
+		// Verify
+		fail("TODO: complete testing");
 	}
 }

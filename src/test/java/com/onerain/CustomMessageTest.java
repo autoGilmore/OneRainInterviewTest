@@ -1,6 +1,7 @@
 package com.onerain;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import org.junit.Test;
 
@@ -50,5 +51,20 @@ public class CustomMessageTest {
 
 		// Verify
 		assertTrue("was: " + daysUntilNewYear, daysUntilNewYear.equals(expected));
+	}
+
+	@Test
+	public void test_getHourlyRainReport() {
+		// Set up
+		// TODO: store csv test data
+
+		// Test
+		String dataString = CustomMessage.getHourlyRainReport();
+
+		// Verify
+		assertTrue("was: " + dataString, dataString.contains("Date"));
+		assertTrue("was: " + dataString, dataString.contains("Time"));
+		assertTrue("was: " + dataString, dataString.contains("Accumulation"));
+		fail("TODO: complete testing");
 	}
 }
